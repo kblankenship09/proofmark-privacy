@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Proofmark Privacy Policy</title>
+<meta name="description" content="The privacy policy for Proofmark Capture: what's recorded, what isn't, redaction limits, local-only storage, and how to reach the developer." />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --paper: #fbf8f6;
+    --surface: #ffffff;
+    --ink: #221b1a;
+    --ink-muted: #6b5f5c;
+    --ink-faint: #a89e9b;
+    --accent: #ff3b30;
+    --accent-ink: #b0271f;
+    --line: #e8e0dd;
+    --line-strong: #d8cdc9;
+    --stamp-bg: #fff3f1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #17110f;
+      --surface: #201917;
+      --ink: #f2eae7;
+      --ink-muted: #b8a9a5;
+      --ink-faint: #74635f;
+      --accent: #ff5c50;
+      --accent-ink: #ff8078;
+      --line: #332826;
+      --line-strong: #43332f;
+      --stamp-bg: #2a1917;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #17110f;
+    --surface: #201917;
+    --ink: #f2eae7;
+    --ink-muted: #b8a9a5;
+    --ink-faint: #74635f;
+    --accent: #ff5c50;
+    --accent-ink: #ff8078;
+    --line: #332826;
+    --line-strong: #43332f;
+    --stamp-bg: #2a1917;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Public Sans", -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; }
+
+  ::selection { background: var(--accent); color: #fff; }
+
+  a { color: var(--accent-ink); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { color: var(--accent); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .display {
+    font-family: "Fraunces", Georgia, serif;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+
+  .mono {
+    font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    border-bottom: 1px solid var(--line);
+    padding: 28px clamp(20px, 5vw, 56px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .wordmark .mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--accent);
+    position: relative;
+    flex: none;
+  }
+  .wordmark .mark::before {
+    content: "";
+    position: absolute;
+    left: 22%;
+    top: 30%;
+    width: 46%;
+    height: 34%;
+    background: var(--paper);
+    border-radius: 3px;
+  }
+  .wordmark .mark::after {
+    content: "";
+    position: absolute;
+    right: 8%;
+    bottom: 8%;
+    width: 46%;
+    height: 46%;
+    background: var(--paper);
+    border-radius: 50%;
+  }
+
+  .wordmark .name {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: 0.01em;
+  }
+  .wordmark .name span { color: var(--ink-muted); font-weight: 400; }
+
+  .stamp {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    border: 1.5px solid var(--accent-ink);
+    border-radius: 4px;
+    padding: 7px 11px;
+    background: var(--stamp-bg);
+    transform: rotate(-1.2deg);
+    white-space: nowrap;
+  }
+
+  /* ---------- layout ---------- */
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 56px) 96px;
+    display: grid;
+    grid-template-columns: 200px minmax(0, 700px);
+    gap: clamp(24px, 4vw, 64px);
+    justify-content: center;
+  }
+
+  @media (max-width: 880px) {
+    .page { grid-template-columns: minmax(0, 700px); }
+    .toc-rail { display: none; }
+  }
+
+  .toc-rail {
+    position: sticky;
+    top: 32px;
+    align-self: start;
+    padding-top: 56px;
+  }
+
+  .toc-rail .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+
+  .toc-rail ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: toc;
+  }
+
+  .toc-rail li {
+    counter-increment: toc;
+    margin-bottom: 3px;
+  }
+
+  .toc-rail a {
+    display: flex;
+    gap: 8px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 5px 0;
+    border-left: 2px solid transparent;
+    padding-left: 10px;
+    margin-left: -12px;
+  }
+
+  .toc-rail a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    flex: none;
+  }
+
+  .toc-rail a:hover {
+    color: var(--accent-ink);
+    border-left-color: var(--accent);
+  }
+
+  main { padding-top: 56px; min-width: 0; }
+
+  .intro h1 {
+    font-size: clamp(34px, 4.4vw, 46px);
+    line-height: 1.08;
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+
+  .intro .dek {
+    font-size: 17px;
+    color: var(--ink-muted);
+    max-width: 54ch;
+    margin: 0 0 28px;
+  }
+
+  .tldr {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 20px 22px;
+    margin-bottom: 12px;
+  }
+
+  .tldr .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin-bottom: 10px;
+  }
+
+  .tldr ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .tldr li { display: flex; gap: 10px; font-size: 14.5px; color: var(--ink); }
+  .tldr li::before {
+    content: "";
+    flex: none;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 7px;
+  }
+
+  /* ---------- sections ---------- */
+
+  section.policy-section {
+    padding-top: 52px;
+    margin-top: 52px;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: 24px;
+    position: relative;
+  }
+
+  section.policy-section:first-of-type { border-top: none; margin-top: 44px; padding-top: 0; }
+
+  .sec-num {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 25px;
+    margin: 0 0 16px;
+  }
+
+  h3 {
+    font-family: "Public Sans", sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin: 26px 0 10px;
+    color: var(--ink);
+  }
+
+  p { margin: 0 0 14px; max-width: 66ch; }
+  p.lead { font-size: 16.5px; }
+
+  ul.plain, ol.plain { margin: 0 0 14px; padding-left: 22px; max-width: 62ch; }
+  ul.plain li, ol.plain li { margin-bottom: 7px; }
+
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 16px 18px;
+    margin: 18px 0;
+    font-size: 14.5px;
+    max-width: 62ch;
+  }
+  .callout strong { color: var(--accent-ink); }
+
+  table {
+    width: 100%;
+    max-width: 62ch;
+    border-collapse: collapse;
+    margin: 8px 0 20px;
+    font-size: 13.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 9px 12px 9px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  td.neg { color: var(--ink-muted); }
+
+  code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1px 5px;
+  }
+
+  .contact-block {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 26px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .contact-block .who { font-size: 14px; color: var(--ink-muted); max-width: 40ch; }
+  .contact-block .email {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+  footer a { color: var(--ink-faint); }
+  footer a:hover { color: var(--accent-ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+  }
+
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wordmark">
+    <span class="mark" aria-hidden="true"></span>
+    <span class="name">Proofmark <span>Capture</span></span>
+  </div>
+  <span class="stamp">Effective 10 Sep 2026 &middot; v1.0</span>
+</header>
+
+<div class="page">
+  <nav class="toc-rail" aria-label="Sections">
+    <div class="label">In this policy</div>
+    <ol>
+      <li><a href="#collect">What's recorded</a></li>
+      <li><a href="#never">What's never recorded</a></li>
+      <li><a href="#redaction">Screenshots &amp; redaction</a></li>
+      <li><a href="#storage">Where data lives</a></li>
+      <li><a href="#export">Exporting &amp; sharing</a></li>
+      <li><a href="#control">Your controls</a></li>
+      <li><a href="#thirdparty">Third parties</a></li>
+      <li><a href="#retention">Retention &amp; deletion</a></li>
+      <li><a href="#children">Children's privacy</a></li>
+      <li><a href="#extension">Browser extension</a></li>
+      <li><a href="#changes">Changes to this policy</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <h1 class="display">Privacy Policy</h1>
+      <p class="dek">Proofmark Capture turns your clicks into a step-by-step guide, entirely on your own machine. This page is the complete, plain-language account of what that involves &mdash; there's no fine print elsewhere.</p>
+
+      <div class="tldr">
+        <div class="label">In short</div>
+        <ul>
+          <li>Everything Proofmark records stays on your device &mdash; nothing is uploaded, synced, or sent to us, ever.</li>
+          <li>Recording only happens while you've pressed Start, and only screenshots of the window you click into &mdash; not your whole screen, and not your keystrokes.</li>
+          <li>A best-effort filter blacks out likely-sensitive windows automatically, but it can miss things &mdash; review a guide before you share it.</li>
+          <li>No accounts, no analytics, no ads, no third parties of any kind.</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="policy-section" id="collect">
+      <div class="sec-num">01</div>
+      <h2>What's recorded</h2>
+      <p class="lead">Proofmark only records anything while you've explicitly clicked <strong>Start Recording</strong>. While it's on, it watches for two kinds of input, system-wide:</p>
+      <ul class="plain">
+        <li><strong>Left-clicks</strong> anywhere on the desktop &mdash; not just inside the Proofmark window.</li>
+        <li><strong>Enter and Tab key presses</strong> &mdash; recorded only as the fact that Enter or Tab was pressed, never any other key.</li>
+      </ul>
+      <p>For each one, Proofmark takes a screenshot cropped to just the window you interacted with, notes which application and window title were active (used to write a step description like &ldquo;Click in Google Chrome&rdquo;), and timestamps the moment. That's the complete list of what a capture event contains.</p>
+    </section>
+
+    <section class="policy-section" id="never">
+      <div class="sec-num">02</div>
+      <h2>What's never recorded</h2>
+      <table>
+        <thead><tr><th>Never captured</th><th>Why it doesn't come up</th></tr></thead>
+        <tbody>
+          <tr><td>Keystroke content</td><td class="neg">Only <em>that</em> Enter/Tab was pressed &mdash; never what you typed, anywhere, including in password fields.</td></tr>
+          <tr><td>Clipboard contents</td><td class="neg">Proofmark never reads the clipboard.</td></tr>
+          <tr><td>Microphone or camera</td><td class="neg">Never accessed by the app.</td></tr>
+          <tr><td>Network traffic or browsing history</td><td class="neg">Not inspected or logged, beyond the visible window title of an active browser tab.</td></tr>
+          <tr><td>Anything while recording is off</td><td class="neg">The click/key listener is idle unless a recording session is active.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="policy-section" id="redaction">
+      <div class="sec-num">03</div>
+      <h2>Screenshots &amp; redaction</h2>
+      <p class="lead">Since there's no way to inspect the DOM of an arbitrary desktop application, Proofmark can't know precisely where a password field sits on screen the way its browser extension can. Instead, it uses a heuristic: before saving a screenshot, it checks the active window's title against a list of terms that tend to signal sensitive content &mdash; things like &ldquo;password,&rdquo; &ldquo;sign in,&rdquo; &ldquo;account,&rdquo; &ldquo;verification code,&rdquo; &ldquo;banking,&rdquo; and &ldquo;api key.&rdquo; A match blacks out a region of that screenshot automatically.</p>
+      <div class="callout">
+        <strong>This is a best-effort safeguard, not a guarantee.</strong> A window with an unrelated title can still contain a sensitive field, and the filter can't read what's actually on screen &mdash; only the title bar. Always review a session's screenshots before exporting or sharing a guide, and use the built-in manual redaction/blur tools on anything the automatic filter missed.
+      </div>
+    </section>
+
+    <section class="policy-section" id="storage">
+      <div class="sec-num">04</div>
+      <h2>Where data lives</h2>
+      <p class="lead">Locally, in a single file in your Windows user profile &mdash; nowhere else. There's no account to create, no sign-in, and no server that Proofmark talks to. The app makes no network requests at all.</p>
+      <p>Concretely, captured steps and their screenshots are stored as JSON at <code>%AppData%\proofmark-desktop\proofmark-state.json</code>. Standard Windows file permissions restrict that folder to your user account; Proofmark doesn't apply any additional encryption of its own, so if you're capturing especially sensitive workflows on a shared or unencrypted machine, we&rsquo;d recommend pairing it with full-disk encryption (BitLocker) as you would for any other locally-stored file.</p>
+    </section>
+
+    <section class="policy-section" id="export">
+      <div class="sec-num">05</div>
+      <h2>Exporting &amp; sharing</h2>
+      <p class="lead">When you export a guide &mdash; as HTML, PDF, or Word &mdash; the file is written only to a location you pick yourself, through a standard save dialog. We never receive a copy, automatically or otherwise; from that point on, the exported file is a regular file on your disk, and sharing it is entirely your call.</p>
+    </section>
+
+    <section class="policy-section" id="control">
+      <div class="sec-num">06</div>
+      <h2>Your controls</h2>
+      <ul class="plain">
+        <li><strong>Start / Stop Recording</strong> &mdash; nothing is captured outside an active session.</li>
+        <li><strong>Edit, reorder, or delete</strong> any individual step before exporting.</li>
+        <li><strong>Clear Steps</strong> &mdash; permanently and immediately deletes every captured step from local storage.</li>
+        <li><strong>Manual redaction tools</strong> &mdash; blur, black-box, or annotate over anything the automatic filter missed, before you export.</li>
+      </ul>
+    </section>
+
+    <section class="policy-section" id="thirdparty">
+      <div class="sec-num">07</div>
+      <h2>Third parties</h2>
+      <p class="lead">None. Proofmark doesn't include analytics, crash reporting, advertising, or any other third-party SDK. Nothing you capture is sold, shared, or otherwise made available to anyone &mdash; there's simply no channel for it to leave your device through the app itself.</p>
+    </section>
+
+    <section class="policy-section" id="retention">
+      <div class="sec-num">08</div>
+      <h2>Retention &amp; deletion</h2>
+      <p class="lead">Captured steps stay in local storage until you clear them yourself, either by deleting individual steps or using Clear Steps. Uninstalling the app removes the program but, like most desktop apps, may leave its local data folder behind &mdash; delete <code>%AppData%\proofmark-desktop\</code> directly if you want to remove it completely.</p>
+    </section>
+
+    <section class="policy-section" id="children">
+      <div class="sec-num">09</div>
+      <h2>Children's privacy</h2>
+      <p class="lead">Proofmark Capture is a general-purpose documentation tool, not directed at children, and it doesn't collect information in a way that identifies a user's age. We don't knowingly collect data from children under 13.</p>
+    </section>
+
+    <section class="policy-section" id="extension">
+      <div class="sec-num">10</div>
+      <h2>Browser extension</h2>
+      <p class="lead">Proofmark's companion Chrome/Edge extension follows the same principles, adapted to the browser: it records interactions within browser tabs using the page's own structure (so it can redact password fields precisely, rather than by heuristic), stores everything locally via the browser's own storage APIs, and likewise sends nothing to us. This policy applies to it as well.</p>
+    </section>
+
+    <section class="policy-section" id="changes">
+      <div class="sec-num">11</div>
+      <h2>Changes to this policy</h2>
+      <p class="lead">If this policy changes, the version and effective date stamped at the top of this page will change with it, and the full revision history is kept in this page's own public repository. We won't broaden what Proofmark collects without reflecting it here first.</p>
+      <p><a href="https://github.com/kblankenship09/proofmark-privacy" target="_blank" rel="noopener">github.com/kblankenship09/proofmark-privacy</a></p>
+    </section>
+
+    <section class="policy-section" id="contact">
+      <div class="sec-num">12</div>
+      <h2>Contact</h2>
+      <div class="contact-block">
+        <p class="who">Questions about this policy or how Proofmark Capture handles data can go directly to the developer.</p>
+        <a class="email" href="mailto:kblankenship.proofmark@gmail.com">kblankenship.proofmark@gmail.com</a>
+      </div>
+    </section>
+
+    <footer>
+      <span>&copy; 2026 Proofmark Capture</span>
+      <span>Effective 10 September 2026 &middot; Version 1.0</span>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
