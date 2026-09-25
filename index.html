@@ -394,7 +394,7 @@
     <span class="mark" aria-hidden="true"></span>
     <span class="name">Proofmark <span>Capture</span></span>
   </div>
-  <span class="stamp">Effective 10 Sep 2026 &middot; v1.0</span>
+  <span class="stamp">Effective 24 Sep 2026 &middot; v1.1</span>
 </header>
 
 <div class="page">
@@ -410,7 +410,6 @@
       <li><a href="#thirdparty">Third parties</a></li>
       <li><a href="#retention">Retention &amp; deletion</a></li>
       <li><a href="#children">Children's privacy</a></li>
-      <li><a href="#extension">Browser extension</a></li>
       <li><a href="#changes">Changes to this policy</a></li>
       <li><a href="#contact">Contact</a></li>
     </ol>
@@ -426,6 +425,7 @@
         <ul>
           <li>Everything Proofmark records stays on your device &mdash; nothing is uploaded, synced, or sent to us, ever.</li>
           <li>Recording only happens while you've pressed Start, and only screenshots of the window you click into &mdash; not your whole screen, and not your keystrokes.</li>
+          <li>By default only left-clicks and Enter/Tab are recorded; an off-by-default setting can also capture right-clicks, scrolls, and drags if you turn it on.</li>
           <li>A best-effort filter blacks out likely-sensitive windows automatically, but it can miss things &mdash; review a guide before you share it.</li>
           <li>No accounts, no analytics, no ads, no third parties of any kind.</li>
         </ul>
@@ -435,12 +435,13 @@
     <section class="policy-section" id="collect">
       <div class="sec-num">01</div>
       <h2>What's recorded</h2>
-      <p class="lead">Proofmark only records anything while you've explicitly clicked <strong>Start Recording</strong>. While it's on, it watches for two kinds of input, system-wide:</p>
+      <p class="lead">Proofmark only records anything while you've explicitly clicked <strong>Start Recording</strong>. While it's on, it watches for input system-wide &mdash; not just inside the Proofmark window:</p>
       <ul class="plain">
-        <li><strong>Left-clicks</strong> anywhere on the desktop &mdash; not just inside the Proofmark window.</li>
+        <li><strong>Left-clicks</strong> &mdash; always recorded while a session is active.</li>
         <li><strong>Enter and Tab key presses</strong> &mdash; recorded only as the fact that Enter or Tab was pressed, never any other key.</li>
+        <li><strong>Right-clicks, scroll gestures, and click-and-drag</strong> &mdash; only recorded if you turn on the app's &ldquo;Also capture right-clicks, scrolls &amp; drags&rdquo; setting, which is off by default.</li>
       </ul>
-      <p>For each one, Proofmark takes a screenshot cropped to just the window you interacted with, notes which application and window title were active (used to write a step description like &ldquo;Click in Google Chrome&rdquo;), and timestamps the moment. That's the complete list of what a capture event contains.</p>
+      <p>For each one, Proofmark takes a screenshot cropped to just the window you interacted with (or, for a right-click that lands inside a context menu, just the menu itself), notes which application and window title were active (used to write a step description like &ldquo;Click in Google Chrome&rdquo;), and timestamps the moment. That's the complete list of what a capture event contains.</p>
     </section>
 
     <section class="policy-section" id="never">
@@ -461,7 +462,7 @@
     <section class="policy-section" id="redaction">
       <div class="sec-num">03</div>
       <h2>Screenshots &amp; redaction</h2>
-      <p class="lead">Since there's no way to inspect the DOM of an arbitrary desktop application, Proofmark can't know precisely where a password field sits on screen the way its browser extension can. Instead, it uses a heuristic: before saving a screenshot, it checks the active window's title against a list of terms that tend to signal sensitive content &mdash; things like &ldquo;password,&rdquo; &ldquo;sign in,&rdquo; &ldquo;account,&rdquo; &ldquo;verification code,&rdquo; &ldquo;banking,&rdquo; and &ldquo;api key.&rdquo; A match blacks out a region of that screenshot automatically.</p>
+      <p class="lead">Since there's no way to inspect the DOM of an arbitrary desktop application, Proofmark can't know precisely where a password field sits on screen. Instead, it uses a heuristic: before saving a screenshot, it checks the active window's title against a list of terms that tend to signal sensitive content &mdash; things like &ldquo;password,&rdquo; &ldquo;sign in,&rdquo; &ldquo;account,&rdquo; &ldquo;verification code,&rdquo; &ldquo;banking,&rdquo; and &ldquo;api key.&rdquo; A match blacks out a region of that screenshot automatically.</p>
       <div class="callout">
         <strong>This is a best-effort safeguard, not a guarantee.</strong> A window with an unrelated title can still contain a sensitive field, and the filter can't read what's actually on screen &mdash; only the title bar. Always review a session's screenshots before exporting or sharing a guide, and use the built-in manual redaction/blur tools on anything the automatic filter missed.
       </div>
@@ -509,21 +510,15 @@
       <p class="lead">Proofmark Capture is a general-purpose documentation tool, not directed at children, and it doesn't collect information in a way that identifies a user's age. We don't knowingly collect data from children under 13.</p>
     </section>
 
-    <section class="policy-section" id="extension">
-      <div class="sec-num">10</div>
-      <h2>Browser extension</h2>
-      <p class="lead">Proofmark's companion Chrome/Edge extension follows the same principles, adapted to the browser: it records interactions within browser tabs using the page's own structure (so it can redact password fields precisely, rather than by heuristic), stores everything locally via the browser's own storage APIs, and likewise sends nothing to us. This policy applies to it as well.</p>
-    </section>
-
     <section class="policy-section" id="changes">
-      <div class="sec-num">11</div>
+      <div class="sec-num">10</div>
       <h2>Changes to this policy</h2>
       <p class="lead">If this policy changes, the version and effective date stamped at the top of this page will change with it, and the full revision history is kept in this page's own public repository. We won't broaden what Proofmark collects without reflecting it here first.</p>
       <p><a href="https://github.com/kblankenship09/proofmark-privacy" target="_blank" rel="noopener">github.com/kblankenship09/proofmark-privacy</a></p>
     </section>
 
     <section class="policy-section" id="contact">
-      <div class="sec-num">12</div>
+      <div class="sec-num">11</div>
       <h2>Contact</h2>
       <div class="contact-block">
         <p class="who">Questions about this policy or how Proofmark Capture handles data can go directly to the developer.</p>
@@ -533,7 +528,7 @@
 
     <footer>
       <span>&copy; 2026 Proofmark Capture</span>
-      <span>Effective 10 September 2026 &middot; Version 1.0</span>
+      <span>Effective 24 September 2026 &middot; Version 1.1</span>
     </footer>
   </main>
 </div>
